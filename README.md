@@ -20,3 +20,8 @@ To do so, create sub-images that add your .json or .p12 keys in `/root/project-k
 
 * `/root/project-keys/my-project.json`
 * `/root/project-keys/my-other-project.p12`
+
+For *p12* keys files, you have to also provide the *account* (service account email) to use in the `/root/project-keys/<project>.account` file. For instance:
+
+* `/root/project-keys/my-project.p12`
+* `/root/project-keys/my-project.account`

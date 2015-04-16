@@ -5,7 +5,11 @@ MAINTAINER Cogniteev <tech@cogniteev.com>
 # Install prerequisites
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get install -y curl python openssh-client
+RUN apt-get update && apt-get install -y \
+    curl \
+    openssh-client \
+    python \
+    python-openssl
 
 # Install gcloud
 
@@ -25,10 +29,8 @@ RUN yes | gcloud components update preview
 
 RUN ssh-keygen -t dsa -b 1024 -N "" -f /root/.ssh/google_compute_engine
 
-
+ENV CLOUDSDK_PYTHON_SITEPACKAGES 1
 ADD activate-service-accounts /root/
 
 ONBUILD ADD projects/* /root/project-keys/
 ONBUILD RUN /root/activate-service-accounts
-
-ENTRYPOINT gcloud
