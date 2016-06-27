@@ -20,6 +20,6 @@ if [ -z "$account" ]; then
     exit 1
 fi
 
-gcloud config set account "${account}" && echo "Account for '${project}' is now active"
+gcloud config set account "${account}"
 
 
