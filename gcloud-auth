@@ -1,0 +1,25 @@
+#!/bin/bash -e
+
+project=$1
+if [ -z "$project" ]; then
+    echo "Usage: gcloud-auth <project-name>"
+    exit 1
+fi
+
+account=""
+if [ -d /root/project-keys ] ; then
+    for key_file in `find /root/project-keys -type f -name \*.account`; do
+        filename="${key_file##*/}"
+        if [ "$project" == "${filename%.*}" ] ; then
+            account=`cat ${key_file}`
+        fi
+    done
+fi
+if [ -z "$account" ]; then
+    echo "Account file '${project}.account' not found"
+    exit 1
+fi
+
+gcloud config set account "${account}"
+
+

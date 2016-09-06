@@ -31,6 +31,7 @@ RUN ssh-keygen -t dsa -b 1024 -N "" -f /root/.ssh/google_compute_engine
 
 ENV CLOUDSDK_PYTHON_SITEPACKAGES 1
 ADD activate-service-accounts /root/
+COPY gcloud-auth /usr/local/bin/
 
 ONBUILD ADD projects/* /root/project-keys/
 ONBUILD RUN /root/activate-service-accounts
